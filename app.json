@@ -1,0 +1,34 @@
+{
+  "expo": {
+    "name": "占い師AI",
+    "slug": "uranai-app",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "scheme": "uranaiapp",
+    "userInterfaceStyle": "dark",
+    "splash": {
+      "resizeMode": "contain",
+      "backgroundColor": "#0D0B2A"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.example.uranaiapp"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#0D0B2A"
+      },
+      "package": "com.example.uranaiapp"
+    },
+    "web": {
+      "bundler": "metro"
+    },
+    "plugins": [
+      "expo-router",
+      "expo-font"
+    ],
+    "experiments": {
+      "typedRoutes": true
+    }
+  }
+}
