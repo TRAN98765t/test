@@ -3,6 +3,8 @@ import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { useRouter } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { FortuneCard } from '@/components/FortuneCard';
+import { MoonIcon } from '@/components/icons/MoonIcon';
+import { SparkleDivider } from '@/components/icons/SparkleDivider';
 import { colors, spacing } from '@/constants/colors';
 
 type FortuneMenu = {
@@ -27,12 +29,10 @@ export default function HomeScreen() {
     <SafeAreaView style={styles.safe} edges={['bottom']}>
       <ScrollView contentContainerStyle={styles.container}>
         <View style={styles.hero}>
-          <Text style={styles.moon}>🌙</Text>
+          <MoonIcon size={72} />
           <Text style={styles.title}>占い師AI</Text>
           <Text style={styles.tagline}>星々の叡智が、あなたを導きます</Text>
-          <View style={styles.starLine}>
-            <Text style={styles.starLineText}>✦  ✧  ✦  ✧  ✦</Text>
-          </View>
+          <SparkleDivider />
         </View>
 
         <View style={styles.grid}>
@@ -75,11 +75,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingVertical: spacing.xl,
   },
-  moon: {
-    fontSize: 52,
-    marginBottom: spacing.sm,
-  },
   title: {
+    marginTop: spacing.md,
     fontSize: 32,
     fontWeight: '700',
     color: colors.gold,
@@ -90,13 +87,6 @@ const styles = StyleSheet.create({
     color: colors.subtleText,
     fontSize: 14,
     letterSpacing: 2,
-  },
-  starLine: {
-    marginTop: spacing.md,
-  },
-  starLineText: {
-    color: colors.gold,
-    letterSpacing: 6,
   },
   grid: {
     flexDirection: 'row',
