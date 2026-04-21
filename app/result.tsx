@@ -52,8 +52,25 @@ export default function ResultScreen() {
   }, [type, fortuneInput]);
 
   useEffect(() => {
-    fetchReading();
-  }, [fetchReading]);
+    let cancelled = false;
+    (async () => {
+      setLoading(true);
+      setError(null);
+      try {
+        const result = await getFortuneReading({ type, input: fortuneInput });
+        if (!cancelled) setText(result);
+      } catch (err) {
+        if (!cancelled) {
+          setError(err instanceof Error ? err.message : '占い結果の取得に失敗しました。');
+        }
+      } finally {
+        if (!cancelled) setLoading(false);
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, [type, fortuneInput]);
 
   const onSave = async () => {
     if (!text || saved) return;

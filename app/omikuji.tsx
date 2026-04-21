@@ -29,6 +29,7 @@ function drawOmikuji(): OmikujiResult {
 export default function OmikujiScreen() {
   const router = useRouter();
   const shake = useRef(new Animated.Value(0)).current;
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [result, setResult] = useState<OmikujiResult | null>(null);
   const [shaking, setShaking] = useState(false);
 
@@ -44,6 +45,12 @@ export default function OmikujiScreen() {
     return () => seq.stop();
   }, [shaking, shake]);
 
+  useEffect(() => {
+    return () => {
+      if (timerRef.current) clearTimeout(timerRef.current);
+    };
+  }, []);
+
   const rotate = shake.interpolate({
     inputRange: [-1, 0, 1],
     outputRange: ['-6deg', '0deg', '6deg'],
@@ -52,10 +59,11 @@ export default function OmikujiScreen() {
   const startShake = () => {
     if (shaking || result) return;
     setShaking(true);
-    setTimeout(() => {
+    timerRef.current = setTimeout(() => {
       setShaking(false);
       shake.setValue(0);
       setResult(drawOmikuji());
+      timerRef.current = null;
     }, 1500);
   };
 
