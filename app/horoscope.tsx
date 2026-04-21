@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { useRouter } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { ZodiacGlyph } from '@/components/icons/ZodiacGlyph';
 import { colors, spacing } from '@/constants/colors';
 import { horoscopePeriods, zodiacSigns, type HoroscopePeriod } from '@/constants/zodiacSigns';
 
@@ -42,7 +43,11 @@ export default function HoroscopeScreen() {
                 onPress={() => setSignId(sign.id)}
                 style={[styles.signCell, selected && styles.signCellSelected]}
               >
-                <Text style={styles.signSymbol}>{sign.symbol}</Text>
+                <ZodiacGlyph
+                  symbol={sign.symbol}
+                  size={44}
+                  color={selected ? colors.gold : colors.subtleText}
+                />
                 <Text style={styles.signName}>{sign.nameJa}</Text>
                 <Text style={styles.signPeriod}>{sign.period}</Text>
               </Pressable>
@@ -117,10 +122,6 @@ const styles = StyleSheet.create({
   signCellSelected: {
     borderColor: colors.gold,
     backgroundColor: '#3a2a66',
-  },
-  signSymbol: {
-    fontSize: 28,
-    color: colors.gold,
   },
   signName: {
     marginTop: 4,
